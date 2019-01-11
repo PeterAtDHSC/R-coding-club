@@ -1,0 +1,11 @@
+library(tidyverse)
+songs<-as.tibble(read.csv("data/featuresdf.csv"))
+songs$rank<-seq.int(nrow(songs))
+str(songs) 
+mypca<-songs %>% 
+  select(-name,-artists,-mode,-time_signature,-key,-id) %>%
+  princomp()
+mypca$loadings
+songs %>% 
+  select(rank,tempo) %>%
+  plot()
